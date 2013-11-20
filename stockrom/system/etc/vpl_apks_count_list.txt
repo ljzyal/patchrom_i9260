@@ -1,0 +1,6 @@
+/system/preload/Amap_V2.0_Deletable.apk
+/system/preload/QQ_V2012_Deletable.apk
+/system/preload/Sinamicroblog_V3.0_Deletable.apk
+/system/preload/QQBrowser_V3.0_Deletable.apk
+/system/preload/MediaHub_chn.apk
+/system/preload/ReadersHub_chn.apk
