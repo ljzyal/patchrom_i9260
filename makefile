@@ -54,6 +54,7 @@ local-pre-zip-misc:
 	done
 	more $(pre_install_data_packages) | wc -l > $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
 	more $(pre_install_data_packages) >> $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
+	rm -rf $(ZIP_DIR)/system/tts/*
 
 out/framework2.jar : out/framework.jar
 

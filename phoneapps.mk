@@ -32,7 +32,6 @@ private-phone-apps := ApplicationsProvider \
 					  PopupuiReceiver \
 					  Preconfig \
 					  PreloadInstaller \
-					  SamsungTTS \
 					  SamsungIME \
 					  SecMediaProvider \
 					  SecHTMLViewer \
