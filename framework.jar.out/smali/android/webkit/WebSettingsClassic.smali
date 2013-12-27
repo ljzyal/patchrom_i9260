@@ -60,6 +60,8 @@
 
 .field private mAutoFillProfile:Landroid/webkit/WebSettingsClassic$AutoFillProfile;
 
+.field private mBlockFloatPopupWindows:Z
+
 .field private mBlockNetworkImage:Z
 
 .field private mBlockNetworkLoads:Z
@@ -433,6 +435,8 @@
     iput-boolean v3, p0, Landroid/webkit/WebSettingsClassic;->mForceUserScalable:Z
 
     iput-boolean v2, p0, Landroid/webkit/WebSettingsClassic;->mPasswordEchoEnabled:Z
+
+    iput-boolean v2, p0, Landroid/webkit/WebSettingsClassic;->mBlockFloatPopupWindows:Z
 
     iput-boolean v3, p0, Landroid/webkit/WebSettingsClassic;->mUseEmailViewport:Z
 
@@ -1612,11 +1616,35 @@
     throw v0
 .end method
 
-.method public declared-synchronized getBlockNetworkImage()Z
+.method public declared-synchronized getBlockFloatPopupWindows()Z
     .locals 1
 
     .prologue
     .line 1379
+    monitor-enter p0
+
+    :try_start_0
+    iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mBlockFloatPopupWindows:Z
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit p0
+
+    return v0
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
+.end method
+
+.method public declared-synchronized getBlockNetworkImage()Z
+    .locals 1
+
+    .prologue
+    .line 1399
     monitor-enter p0
 
     :try_start_0
@@ -1640,7 +1668,6 @@
     .locals 1
 
     .prologue
-    .line 1399
     monitor-enter p0
 
     :try_start_0
@@ -3202,12 +3229,43 @@
     throw v0
 .end method
 
-.method public declared-synchronized setAllowUniversalAccessFromFileURLs(Z)V
+.method public declared-synchronized setBlockFloatPopupWindows(Z)V
     .locals 1
     .parameter "flag"
 
     .prologue
     .line 1436
+    monitor-enter p0
+
+    :try_start_0
+    iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mBlockFloatPopupWindows:Z
+
+    if-eq v0, p1, :cond_0
+
+    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mBlockFloatPopupWindows:Z
+
+    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    :cond_0
+    monitor-exit p0
+
+    return-void
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
+.end method
+
+.method public declared-synchronized setAllowUniversalAccessFromFileURLs(Z)V
+    .locals 1
+    .parameter "flag"
+
+    .prologue
     monitor-enter p0
 
     :try_start_0
@@ -3812,6 +3870,37 @@
     return-void
 
     .line 1748
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
+.end method
+
+.method public declared-synchronized setLoadsImagesOnDemand(Z)V
+    .locals 1
+    .parameter "flag"
+
+    .prologue
+    monitor-enter p0
+
+    :try_start_0
+    iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mLoadsImagesOnDemand:Z
+
+    if-eq v0, p1, :cond_0
+
+    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mLoadsImagesOnDemand:Z
+
+    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    :cond_0
+    monitor-exit p0
+
+    return-void
+
     :catchall_0
     move-exception v0
 
@@ -4640,37 +4729,6 @@
     throw v0
 .end method
 
-.method public declared-synchronized setLoadsImagesOnDemand(Z)V
-    .locals 1
-    .parameter "flag"
-
-    .prologue
-    monitor-enter p0
-
-    :try_start_0
-    iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mLoadsImagesOnDemand:Z
-
-    if-eq v0, p1, :cond_0
-
-    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mLoadsImagesOnDemand:Z
-
-    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    :cond_0
-    monitor-exit p0
-
-    return-void
-
-    :catchall_0
-    move-exception v0
-
-    monitor-exit p0
-
-    throw v0
-.end method
-
 .method public setMaximumDecodedImageSize(J)V
     .locals 2
     .parameter "size"
@@ -4806,35 +4864,6 @@
     .line 1838
     :cond_0
     return-void
-.end method
-
-.method public declared-synchronized setNightReadModeEnabled(Z)V
-    .locals 1
-    .parameter "enable"
-    .annotation build Landroid/annotation/MiuiHook;
-        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->NEW_METHOD:Landroid/annotation/MiuiHook$MiuiHookType;
-    .end annotation
-
-    .prologue
-    monitor-enter p0
-
-    :try_start_0
-    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mNightReadMode:Z
-
-    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    monitor-exit p0
-
-    return-void
-
-    :catchall_0
-    move-exception v0
-
-    monitor-exit p0
-
-    throw v0
 .end method
 
 .method public declared-synchronized setNotificationState(Landroid/webkit/WebSettings$NotificationState;)V
@@ -6373,4 +6402,33 @@
     monitor-exit p0
 
     throw v1
+.end method
+
+.method public declared-synchronized setNightReadModeEnabled(Z)V
+    .locals 1
+    .parameter "enable"
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->NEW_METHOD:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
+
+    .prologue
+    monitor-enter p0
+
+    :try_start_0
+    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mNightReadMode:Z
+
+    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit p0
+
+    return-void
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
 .end method
