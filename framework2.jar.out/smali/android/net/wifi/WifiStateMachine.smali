@@ -5713,6 +5713,10 @@
     invoke-virtual {v1, v3}, Landroid/net/wifi/WifiInfo;->setMeteredHint(Z)V
 
     .line 2738
+    iget-object v1, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
+
+    invoke-virtual {v1, v3}, Landroid/net/wifi/WifiInfo;->setVendorInfo(Ljava/lang/String;)V
+
     sget v0, Landroid/net/wifi/WifiStateMachine;->DEFAULT_MAX_DHCP_RETRIES:I
 
     .line 2739
@@ -5918,6 +5922,10 @@
     .line 2622
     iget-object v1, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
 
+    invoke-virtual {v1, v2}, Landroid/net/wifi/WifiInfo;->setVendorInfo(Ljava/lang/String;)V
+
+    iget-object v1, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
+
     invoke-virtual {v1, v5}, Landroid/net/wifi/WifiInfo;->setFrequency(I)V
 
     .line 2626
@@ -6061,6 +6069,12 @@
     move-result v5
 
     invoke-virtual {v4, v5}, Landroid/net/wifi/WifiInfo;->setMeteredHint(Z)V
+
+    iget-object v4, p0, Landroid/net/wifi/WifiStateMachine;->mWifiInfo:Landroid/net/wifi/WifiInfo;
+
+    iget-object v5, p1, Landroid/net/DhcpInfoInternal;->vendorInfo:Ljava/lang/String;
+
+    invoke-virtual {v4, v5}, Landroid/net/wifi/WifiInfo;->setVendorInfo(Ljava/lang/String;)V
 
     .line 2695
     invoke-direct {p0}, Landroid/net/wifi/WifiStateMachine;->getNetworkDetailedState()Landroid/net/NetworkInfo$DetailedState;

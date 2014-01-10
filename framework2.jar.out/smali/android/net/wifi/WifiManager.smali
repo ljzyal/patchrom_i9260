@@ -22,6 +22,8 @@
 
 .field public static final ACTION_PICK_WIFI_NETWORK:Ljava/lang/String; = "android.net.wifi.PICK_WIFI_NETWORK"
 
+.field public static final ACTION_SEC_LAUNCH_OPERATOR_URL:Ljava/lang/String; = "android.net.wifi.SEC_LAUNCH_OPERTOR_URL"
+
 .field public static final ACTION_SEC_NOTIFICATION_CANCEL:Ljava/lang/String; = "android.net.wifi.SEC_NOTIFICATION_CANCEL"
 
 .field public static final ACTION_SEC_PICK_WIFI_NETWORK:Ljava/lang/String; = "android.net.wifi.SEC_PICK_WIFI_NETWORK"
@@ -286,6 +288,10 @@
 .field public static final SEC_COMMAND_ID_GET_WIFIAP_RVFMODE:I = 0x1c
 
 .field public static final SEC_COMMAND_ID_GET_WIFIAP_STANUM:I = 0x3
+
+.field public static final SEC_COMMAND_ID_HOTSPOT20_ENABLE:I = 0x22
+
+.field public static final SEC_COMMAND_ID_HOTSPOT20_ROAM_ENABLE:I = 0x23
 
 .field public static final SEC_COMMAND_ID_INIT:I = 0x0
 
@@ -1755,6 +1761,36 @@
     goto :goto_0
 .end method
 
+.method public getSpecificNetwork(I)Landroid/net/wifi/WifiConfiguration;
+    .locals 2
+    .parameter "netID"
+
+    .prologue
+    .line 701
+    :try_start_0
+    iget-object v1, p0, Landroid/net/wifi/WifiManager;->mService:Landroid/net/wifi/IWifiManager;
+
+    invoke-interface {v1, p1}, Landroid/net/wifi/IWifiManager;->getSpecificNetwork(I)Landroid/net/wifi/WifiConfiguration;
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v1
+
+    .line 703
+    :goto_0
+    return-object v1
+
+    .line 702
+    :catch_0
+    move-exception v0
+
+    .line 703
+    .local v0, e:Landroid/os/RemoteException;
+    const/4 v1, 0x0
+
+    goto :goto_0
+.end method
+
 .method public getWifiAdhocDisable()Z
     .locals 1
 
@@ -2133,6 +2169,40 @@
 
     .line 1002
     .local v0, e:Landroid/os/RemoteException;
+    const/4 v1, 0x0
+
+    goto :goto_0
+.end method
+
+.method public isMiWifi()Z
+    .locals 3
+
+    .prologue
+    invoke-virtual {p0}, Landroid/net/wifi/WifiManager;->getConnectionInfo()Landroid/net/wifi/WifiInfo;
+
+    move-result-object v0
+
+    .local v0, wifiInfo:Landroid/net/wifi/WifiInfo;
+    if-eqz v0, :cond_0
+
+    const-string v1, "XIAOMI_ROUTER"
+
+    invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getVendorInfo()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    const/4 v1, 0x1
+
+    :goto_0
+    return v1
+
+    :cond_0
     const/4 v1, 0x0
 
     goto :goto_0
